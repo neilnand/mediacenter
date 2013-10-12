@@ -1,0 +1,11 @@
+{
+    "name": "mediacenter",
+    "version": "0.0.0",
+    "main": "mediacenter.js",
+    "dependencies": {
+        "angular": "~1.0.8",
+        "requirejs": "~2.1.8",
+        "requirejs-text": "~2.0.10",
+        "underscore-amd": "~1.5.2"
+    }
+}
