@@ -4,8 +4,6 @@ npm-debug.log
 .DS_Store
 coverage.html
 bower_components/**/*
-demo/**/*
-demo/*
 tmp/**/*
 tmp/*
 doc/
