@@ -1,11 +1,33 @@
 {
-    "name": "mediacenter",
-    "version": "0.0.0",
-    "main": "mediacenter.js",
-    "dependencies": {
-        "angular": "~1.0.8",
-        "requirejs": "~2.1.8",
-        "requirejs-text": "~2.0.10",
-        "underscore-amd": "~1.5.2"
-    }
+  "name": "mediacenter",
+  "version": "0.0.1",
+  "homepage": "http://www.neilnand.com/",
+  "authors": [
+    "Neil Nand <neilnand@gmail.com>"
+  ],
+  "description": "Media Center Project",
+  "main": "index.js",
+  "keywords": [
+    "raspberrypi",
+    "raspi",
+    "coffee",
+    "coffeescript",
+    "javascript",
+    "jsmedia",
+    "mediacenter"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.0.8",
+    "requirejs": "~2.1.8",
+    "requirejs-text": "~2.0.10",
+    "underscore-amd": "~1.5.2"
+  }
 }

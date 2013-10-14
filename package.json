@@ -1,45 +1,42 @@
 {
-    "name": "mediacenter",
-    "version": "0.0.0",
-    "description": "Media Center Project",
-    "main": "index.js",
-    "scripts": {
-        "clear": "rm -rf node_modules app/components coverage.html tmp"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git@github.com:neilnand/mediacenter.git"
-    },
-    "keywords": [
-        "raspberrypi",
-        "pi",
-        "angular",
-        "node"
-    ],
-    "config": {
-        "server": {
-            "port": 7777
-        },
-        "livereload": {
-            "port": 77771
-        },
-        "src": "mediacenter"
-    },
-    "author": "Neil Nand <neilnand@gmail.com>",
-    "license": "MIT",
-    "devDependencies": {
-        "bower": "~1.2.7",
-        "grunt": "~0.4.1",
-        "matchdep": "~0.3.0",
-        "connect-livereload": "~0.3.0",
-        "grunt-coffeelint": "~0.0.7",
-        "grunt-contrib-clean": "~0.5.0",
-        "grunt-contrib-coffee": "~0.6.4",
-        "grunt-contrib-copy": "~0.4.1",
-        "grunt-symlink": "~0.4.0",
-        "grunt-contrib-compass": "~0.6.0",
-        "grunt-contrib-connect": "~0.5.0",
-        "grunt-open": "~0.2.2",
-        "grunt-contrib-watch": "~0.5.1"
-    }
+  "name": "mediacenter",
+  "version": "0.0.1",
+  "description": "Media Center Project",
+  "main": "index.js",
+  "scripts": {
+    "start": "bower install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/neilnand/mediacenter.git"
+  },
+  "keywords": [
+    "raspberrypi",
+    "raspi",
+    "coffee",
+    "coffeescript",
+    "javascript",
+    "js",
+    "media",
+    "mediacenter"
+  ],
+  "author": "Neil Nand <neilnand@gmail.com>",
+  "license": "MIT",
+  "readmeFilename": "README.md",
+  "gitHead": "285d919a4c57237c13470fd122bc7c317a28b656",
+  "bugs": {
+    "url": "https://github.com/neilnand/mediacenter/issues"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-uglify": "~0.2.4",
+    "matchdep": "~0.3.0",
+    "grunt-coffeelint": "0.0.7",
+    "underscore": "~1.5.2",
+    "grunt-contrib-clean": "~0.5.0",
+    "grunt-contrib-coffee": "~0.7.0",
+    "bower": "~1.2.7",
+    "grunt-contrib-requirejs": "~0.4.1",
+    "grunt-symlink": "~0.4.0"
+  }
 }
