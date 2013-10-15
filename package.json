@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "Media Center Project",
   "main": "index.js",
+  "homepage": "https://github.com/neilnand/mediacenter",
   "scripts": {
     "start": "bower install"
   },
@@ -37,6 +38,14 @@
     "grunt-contrib-coffee": "~0.7.0",
     "bower": "~1.2.7",
     "grunt-contrib-requirejs": "~0.4.1",
-    "grunt-symlink": "~0.4.0"
+    "grunt-symlink": "~0.4.0",
+    "grunt-contrib-copy": "~0.4.1",
+    "grunt-contrib-compass": "~0.6.0",
+    "grunt-contrib-yuidoc": "~0.5.0"
+  },
+  "dependencies": {
+    "express": "~3.4.0",
+    "socket.io": "~0.9.16",
+    "omxcontrol": "0.0.1"
   }
 }

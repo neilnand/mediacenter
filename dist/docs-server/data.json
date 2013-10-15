@@ -1,0 +1,13 @@
+{
+    "project": {
+        "name": "mediacenter",
+        "description": "Media Center Project",
+        "version": "0.0.1",
+        "url": "https://github.com/neilnand/mediacenter"
+    },
+    "files": {},
+    "modules": {},
+    "classes": {},
+    "classitems": [],
+    "warnings": []
+}
