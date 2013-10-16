@@ -15,9 +15,12 @@ module.exports = (grunt) ->
       "coffeelint"
       "clean:builds"
       "coffee"
-      "copy:build"
-      "symlink"
-      "compass:build"
+      "copy:dev"
+      "symlink:components"
+      "symlink:html"
+      "compass:dev"
+      "connect"
+      "watch"
     ]
     clear: [
       "clean"
@@ -27,7 +30,7 @@ module.exports = (grunt) ->
       "clean"
       "coffee"
       "uglify"
-      "symlink"
+      "symlink:components"
       "requirejs"
       "compass:release"
       "copy:release"
@@ -85,7 +88,7 @@ module.exports = (grunt) ->
 
     # Convert SASS into CSS
     compass:
-      build:
+      dev:
         options:
           banner: BANNER_OUTPUT
           specify: projects.main.id + "/style/" + projects.main.inputStyle
@@ -103,13 +106,13 @@ module.exports = (grunt) ->
 
     # Copy HTML and resource dependancies to working directories
     copy:
-      build:
+      dev:
         files: [
           {
             expand: true
             cwd: projects.main.id
             src: [
-              "**/*.html"
+#              "**/*.html"
             ]
             dest: BUILD_DIR + projects.main.id
             filter: 'isFile'
@@ -190,6 +193,9 @@ module.exports = (grunt) ->
         relativeSrc: "./../../bower_components/"
         options:
           type: "dir"
+      html:
+        dest: BUILD_DIR + projects.main.id + "/" + npmPackage.main
+        relativeSrc: "./../../" + projects.main.id + "/" + npmPackage.main
 
     # Compile RequireJS main-app structure
     requirejs:
@@ -230,6 +236,47 @@ module.exports = (grunt) ->
           extension: ".coffee"
           syntaxtype: "coffee"
 
+    # Creates a small development server
+    connect:
+      main:
+        options:
+          # Creates server
+          port: npmPackage.ports.main
+          base: BUILD_DIR + projects.main.id
+          # Injects livereload script into html
+          livereload: npmPackage.ports.livereload
+          # Setup livereload
+          middleware: (connect, options) ->
+            # Return connect to multiple operations
+            [
+              # Current server
+              connect.static options.base
+              # Livereload
+              require('connect-livereload')
+                port: npmPackage.ports.livereload
+            ]
+
+    # Watch for changes in development
+    watch:
+      options:
+        livereload: npmPackage.ports.livereload
+      html:
+        files: [
+          projects.main.id + "/" + npmPackage.main
+        ]
+      sass:
+        files: [
+          projects.main.id + "/style/**/*.sass"
+        ]
+        tasks: ["compass:dev"]
+      coffee:
+        files: [
+          projects.main.id + "/scripts/**/*.coffee"
+        ]
+        tasks: [
+          "coffeelint"
+          "coffee"
+        ]
 
 
   # Load NPM modules

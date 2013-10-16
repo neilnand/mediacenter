@@ -143,14 +143,14 @@ define([
       # Create Main App
       deps.unshift CORE_APP
 
-      app = angular.module(APP_NAME, deps)
+      @app = angular.module(APP_NAME, deps)
       console.log &quot;#### APP:&quot;, APP_NAME, &quot;initialize&quot;
-      reg.register app, directivesMap, &quot;directive&quot;
-      reg.register app, filtersMap, &quot;filter&quot;
-      reg.register app, servicesMap, &quot;factory&quot;, false
+      reg.register @app, directivesMap, &quot;directive&quot;
+      reg.register @app, filtersMap, &quot;filter&quot;
+      reg.register @app, servicesMap, &quot;factory&quot;, false
 
       # Return
-      app
+      @app
     ###*
     # Start up the application
     #
