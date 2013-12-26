@@ -35,7 +35,6 @@
   },
   "devDependencies": {
     "grunt": "~0.4.1",
-    "grunt-contrib-uglify": "~0.2.4",
     "matchdep": "~0.3.0",
     "grunt-coffeelint": "0.0.7",
     "underscore": "~1.5.2",

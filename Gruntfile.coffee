@@ -22,7 +22,7 @@ module.exports = (grunt) ->
       "symlink:components"
       "symlink:main"
       "symlink:html"
-      "symlink:public"
+      "symlink:build_public"
       "compass:dev"
 #      "connect"
 #      "watch"
@@ -40,12 +40,11 @@ module.exports = (grunt) ->
       "coffeelint"
       "clean"
       "coffee"
-      "uglify"
       "symlink:components"
       "requirejs"
       "compass:release"
       "copy:release"
-      "yuidoc"
+      "symlink:release_public"
     ]
     docs: [
       "clean"
@@ -159,9 +158,9 @@ module.exports = (grunt) ->
           }
           {
             expand: true
-            cwd: projects.server.id
+            cwd: BUILD_DIR + projects.server.id
             src: [
-              "**/*.html"
+              "**/*"
             ]
             dest: RELEASE_DIR + projects.server.id
             filter: 'isFile'
@@ -192,19 +191,6 @@ module.exports = (grunt) ->
         dest: BUILD_DIR + projects.server.id
         ext: ".js"
 
-    # Uglify and minificate server-app
-    uglify:
-      options:
-        mangle: true
-        banner: BANNER_OUTPUT
-      server:
-        src: BUILD_DIR + projects.server.id + "**/*"
-        dest: [
-          RELEASE_DIR
-          projects.server.id
-          projects.server.outputFilename
-        ].join("/")
-
     # Create reference shortcuts
     symlink:
       components:
@@ -212,8 +198,11 @@ module.exports = (grunt) ->
         relativeSrc: "./../../bower_components/"
         options:
           type: "dir"
-      public:
+      build_public:
         dest: BUILD_DIR + projects.server.id + "/" + projects.server.public
+        relativeSrc: "./../" + projects.main.id
+      release_public:
+        dest: RELEASE_DIR + projects.server.id + "/" + projects.server.public
         relativeSrc: "./../" + projects.main.id
       main:
         dest: BUILD_DIR + projects.main.id + "/" + npmPackage.main

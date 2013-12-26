@@ -3,6 +3,7 @@ requirejs = require "requirejs"
 grunt = require "grunt"
 
 requirejs.config {
+  baseUrl: __dirname
   nodeRequire: require
 }
 
