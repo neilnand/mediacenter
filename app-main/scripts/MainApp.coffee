@@ -1,18 +1,22 @@
 define([
   "Angular"
   "_core/AngularRegistration"
+  "_core/controllers/_reg"
   "_core/directives/_reg"
   "_core/filters/_reg"
   "_core/services/_reg"
+  "controllers/_reg"
   "directives/_reg"
   "filters/_reg"
   "services/_reg"
 ], (
   angular
   reg
+  _controllersMap
   _directivesMap
   _filtersMap
   _servicesMap
+  controllersMap
   directivesMap
   filtersMap
   servicesMap
@@ -46,6 +50,7 @@ define([
       # Create Core App
       core = angular.module CORE_APP, []
       console.log "#### APP:", CORE_APP, "initialize"
+      reg.register core, _controllersMap, "controller"
       reg.register core, _directivesMap, "directive"
       reg.register core, _filtersMap, "filter"
       reg.register core, _servicesMap, "factory", false
@@ -55,6 +60,7 @@ define([
 
       @app = angular.module(APP_NAME, deps)
       console.log "#### APP:", APP_NAME, "initialize"
+      reg.register @app, controllersMap, "controller"
       reg.register @app, directivesMap, "directive"
       reg.register @app, filtersMap, "filter"
       reg.register @app, servicesMap, "factory", false

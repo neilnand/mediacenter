@@ -8,6 +8,7 @@ module.exports = (grunt) ->
   RELEASE_DIR = "./dist/"
   SCRIPTS_DIR = "/scripts/"
   STYLE_DIR = "/style/"
+  HTML_DIR = "/html"
 
   BANNER_OUTPUT = "/*! <%= name %> <%= grunt.template.today('yyyy-mm-dd') %> */\n"
 
@@ -16,12 +17,21 @@ module.exports = (grunt) ->
       "coffeelint"
       "clean:builds"
       "coffee"
-      "copy:dev"
+      "copy:devMain"
+      "copy:devServer"
       "symlink:components"
+      "symlink:main"
       "symlink:html"
+      "symlink:public"
       "compass:dev"
-      "connect"
-      "watch"
+#      "connect"
+#      "watch"
+    ]
+    server: [
+      "coffeelint:server"
+      "clean:builds"
+      "coffee:server"
+      "copy:devServer"
     ]
     clear: [
       "clean"
@@ -58,6 +68,7 @@ module.exports = (grunt) ->
       ]
     server:
       id: "app-server"
+      public: "public"
       docs: "docs-server"
       outputFilename: "server-app.js"
 
@@ -67,8 +78,10 @@ module.exports = (grunt) ->
 
     # Ensure we're using good coding standards
     coffeelint:
-      app: [
+      main: [
         projects.main.id + "/**/*.coffee"
+      ]
+      server: [
         projects.server.id + "/**/*.coffee"
       ]
       options:
@@ -79,6 +92,8 @@ module.exports = (grunt) ->
     clean:
       builds: [
         BUILD_DIR
+      ]
+      release: [
         RELEASE_DIR + projects.main.id
         RELEASE_DIR + projects.server.id
       ]
@@ -107,7 +122,7 @@ module.exports = (grunt) ->
 
     # Copy HTML and resource dependancies to working directories
     copy:
-      dev:
+      devMain:
         files: [
           {
             expand: true
@@ -118,6 +133,9 @@ module.exports = (grunt) ->
             dest: BUILD_DIR + projects.main.id
             filter: 'isFile'
           }
+        ]
+      devServer:
+        files: [
           {
             expand: true
             cwd: projects.server.id
@@ -194,9 +212,15 @@ module.exports = (grunt) ->
         relativeSrc: "./../../bower_components/"
         options:
           type: "dir"
-      html:
+      public:
+        dest: BUILD_DIR + projects.server.id + "/" + projects.server.public
+        relativeSrc: "./../" + projects.main.id
+      main:
         dest: BUILD_DIR + projects.main.id + "/" + npmPackage.main
         relativeSrc: "./../../" + projects.main.id + "/" + npmPackage.main
+      html:
+        dest: BUILD_DIR + projects.main.id + HTML_DIR
+        relativeSrc: "./../../" + projects.main.id + HTML_DIR
 
     # Compile RequireJS main-app structure
     requirejs:
