@@ -4,9 +4,10 @@ module.exports = (grunt) ->
   _ = require "underscore"
 
   # Settings
-  TASK_DIR = "./tasks/"
   BUILD_DIR = "./tmp/"
   RELEASE_DIR = "./dist/"
+  SCRIPTS_DIR = "/scripts/"
+  STYLE_DIR = "/style/"
 
   BANNER_OUTPUT = "/*! <%= name %> <%= grunt.template.today('yyyy-mm-dd') %> */\n"
 
@@ -91,16 +92,16 @@ module.exports = (grunt) ->
       dev:
         options:
           banner: BANNER_OUTPUT
-          specify: projects.main.id + "/style/" + projects.main.inputStyle
-          sassDir: projects.main.id + "/style/"
-          cssDir: BUILD_DIR + projects.main.id + "/style/"
+          specify: projects.main.id + STYLE_DIR + projects.main.inputStyle
+          sassDir: projects.main.id + STYLE_DIR
+          cssDir: BUILD_DIR + projects.main.id + STYLE_DIR
           environment: "development"
       release:
         options:
           banner: BANNER_OUTPUT
-          specify: projects.main.id + "/style/" + projects.main.inputStyle
-          sassDir: projects.main.id + "/style/"
-          cssDir: RELEASE_DIR + projects.main.id + "/style/"
+          specify: projects.main.id + STYLE_DIR + projects.main.inputStyle
+          sassDir: projects.main.id + STYLE_DIR
+          cssDir: RELEASE_DIR + projects.main.id + STYLE_DIR
           outputStyle: "compressed"
           environment: "production"
 
@@ -162,9 +163,9 @@ module.exports = (grunt) ->
     coffee:
       main:
         expand: true,
-        cwd: projects.main.id + "/scripts"
+        cwd: projects.main.id + SCRIPTS_DIR
         src: "**/*.coffee"
-        dest: BUILD_DIR + projects.main.id + "/scripts"
+        dest: BUILD_DIR + projects.main.id + SCRIPTS_DIR
         ext: ".js"
       server:
         expand: true,
@@ -202,14 +203,14 @@ module.exports = (grunt) ->
       compile:
         options:
           name: projects.main.name
-          baseUrl: BUILD_DIR + projects.main.id + "/scripts"
-          mainConfigFile: BUILD_DIR + projects.main.id + "/scripts/" + projects.main.config
+          baseUrl: BUILD_DIR + projects.main.id + SCRIPTS_DIR
+          mainConfigFile: BUILD_DIR + projects.main.id + SCRIPTS_DIR + projects.main.config
           exclude: projects.main.exludeDep
           include: [projects.main.config]
           out: [
             RELEASE_DIR
             projects.main.id
-            "/scripts/"
+            SCRIPTS_DIR
             projects.main.outputFilename
           ].join("/")
 
@@ -266,12 +267,12 @@ module.exports = (grunt) ->
         ]
       sass:
         files: [
-          projects.main.id + "/style/**/*.sass"
+          projects.main.id + STYLE_DIR + "**/*.sass"
         ]
         tasks: ["compass:dev"]
       coffee:
         files: [
-          projects.main.id + "/scripts/**/*.coffee"
+          projects.main.id + SCRIPTS_DIR + "**/*.coffee"
         ]
         tasks: [
           "coffeelint"
