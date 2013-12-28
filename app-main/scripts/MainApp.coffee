@@ -82,6 +82,15 @@ define([
           delete $http.defaults.headers.common['X-Requested-With']
 
           console.log "project start up complete"
+
+          console.log io
+
+          # use http://raspberryPi.local if your using Avahi Service
+          # or use your RasperryPi IP instead
+          socket = io.connect('http://raspberrypi.local:8080')
+          socket.on "connect", (data) ->
+            socket.emit "screen"
+
       ])
 
 

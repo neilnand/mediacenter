@@ -2,6 +2,16 @@
 <html>
 <head>
     <title>My Remote</title>
+
+    <script type="text/javascript" src="./components/socket.io-client/dist/socket.io.min.js"></script>
+    <script>
+        //use http://raspberryPi.local if your using Avahi Service
+        //or use your RasperryPi IP instead
+        var socket = io.connect('http://raspberrypi.local:8080');
+        socket.on('connect', function(data){
+            socket.emit('screen');
+        });
+    </script>
 </head>
 <body>
 

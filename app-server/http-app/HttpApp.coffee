@@ -7,6 +7,8 @@ define([], () ->
       @app = new express()
       @server = require("http").createServer(@app)
       path = require "path"
+      @io = require("socket.io").listen(@server)
+      spawn = require("child_process").spawn
 
       # Environments
       @app.set('port', process.env["TEST_PORT"] || defaultPort)
@@ -15,6 +17,8 @@ define([], () ->
       @app.use(express.bodyParser())
       @app.use(express.methodOverride())
       @app.use(express.static(path.join(__dirname, 'public')))
+
+      @io.set 'log level', 1
 
     route: (path, file) ->
       @app.get path, (req, res) =>
