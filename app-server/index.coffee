@@ -40,8 +40,17 @@ httpApp.io.sockets.on "connection", (socket) ->
     if activeSocket isnt undefined
       console.log "Synced .."
 
+# Shell Commands
+run_shell = (cmd, args, cb, end) ->
+  spawn = require("child_process").spawn
+  child = spawn cmd, args
+  me = this
+  child.stdout.on "data", (buffer) ->
+    cb me, buffer
+  child.stdout.on "end", end
 
-
-
+# OMX Player
+omx = require "omxcontrol"
+httpApp.app.use omx()
 
 httpApp.listen()
